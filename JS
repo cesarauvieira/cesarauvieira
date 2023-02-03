@@ -1,0 +1,19 @@
+const API_KEY = '9998efb867b4271ebc22c1bb97c5bdca';
+
+const tmdb = new TMDB(API_KEY);
+
+function buscarFilme() {
+  const nomeFilme = document.getElementById("filmeInput").value;
+
+  tmdb.movies.getDetails(nomeFilme)
+    .then(res => {
+      console.log(res);
+      const posterPath = `https://image.tmdb.org/t/p/w500${res.poster_path}`;
+
+      document.getElementById("poster").src = posterPath;
+    })
+    .catch(error => {
+      alert("Não foi possível encontrar o filme informado. Verifique se o nome está correto.");
+      console.error(error);
+    });
+}
